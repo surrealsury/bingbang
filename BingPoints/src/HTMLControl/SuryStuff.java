@@ -11,17 +11,15 @@ public class SuryStuff {
 	
 	
 	public SuryStuff() {
+		
 		AccountList accounts = new AccountList(File location);
 		for(accounts.getList() list : accounts) {
-			
+			accounts.
 		}
 		}
 
 	
 	
-	public static nextAccount() {
-		
-	}
 	
 	
 	public static signIn() {
