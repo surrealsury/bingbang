@@ -1,37 +1,69 @@
 package HTMLControl;
 
+import java.awt.Robot;
+import java.awt.AWTException;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.*;
-
 import SignInInfo.AccountList;
+import java.util.ArrayList;
 
 public class SearchDriver {
-	
-	
-	public SearchDriver() {
-		
-		AccountList accounts = new AccountList(File location);
-		for(accounts.getList() list : accounts) {
-			
+
+	WebDriver driver;
+	Robot rob;
+
+	public static void main(String[] args) {
+		try {
+			new SearchDriver();
+		} catch (FileNotFoundException e) {
+
+		} catch (AWTException a) {
+
 		}
 	}
 
-	
-	
-	
-	
-	public static signIn() {
-		
+	public SearchDriver() throws FileNotFoundException, AWTException {
+
+		AccountList accounts = new AccountList("File Location");
+		driver = new InternetExplorerDriver();
+		rob = new Robot();
+		for (int x = 0; x < accounts.getUserName().size(); x++) {
+			driver.get("https://www.bing.com");
+			signIn(accounts.getUserName().get(x), accounts.getPassword().get(x));
+			// Pull up sign in prompt
+		}
 	}
-	
-	public static signOut() {
+
+	public void signIn(String username, String password) {
+		WebElement signinB = driver.findElement(By.name("id_l"));
+		signinB.click();
+		WebElement userField = driver.findElement(By.name("i0116"));
+		userField.sendKeys(username);
+		rob.keyPress(KeyEvent.VK_ENTER);
+		rob.keyRelease(KeyEvent.VK_ENTER);
+		WebElement passField = driver.findElement(By.name("i0118"));
+		passField.sendKeys(password);
+		rob.keyPress(KeyEvent.VK_ENTER);
+		rob.keyRelease(KeyEvent.VK_ENTER);
+		return;
+	}
+
+	public void signOut() {
 		
 	}
 
-	public static search() {
-		
+	public void search() {
+		for(int x = 0; x < 60; x++) {
+			WebElement searchField = driver.findElement(By.name("sb_form_q"));
+			searchField.sendKeys();
+		}
 	}
-	
+
 }

@@ -13,8 +13,8 @@ public class AccountList {
 	private ArrayList<String> password;
 	
 	
-	public AccountList(File n) throws FileNotFoundException {
-		this.list = n;
+	public AccountList(String filename) throws FileNotFoundException {
+		File list = new File(filename);
 		scan = new Scanner(list);
 		while(scan.hasNext()) {
 			username.add(setNextUserName());
