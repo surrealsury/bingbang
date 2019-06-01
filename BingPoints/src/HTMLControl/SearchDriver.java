@@ -12,13 +12,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.*;
 import SignInInfo.AccountList;
+import search.SearchTerms;
+
 import java.util.ArrayList;
+import java.util.Random;
 
 public class SearchDriver {
 
-	WebDriver driver;
-	Robot rob;
-
+	private WebDriver driver;
+	private Robot rob;
+	private SearchTerms terms;
+	Random rand = new Random();
 	public static void main(String[] args) {
 		try {
 			new SearchDriver();
@@ -30,14 +34,17 @@ public class SearchDriver {
 	}
 
 	public SearchDriver() throws FileNotFoundException, AWTException {
-
+		//init vars
 		AccountList accounts = new AccountList("File Location");
+		terms = new SearchTerms();
 		driver = new InternetExplorerDriver();
 		rob = new Robot();
+		
+		
 		for (int x = 0; x < accounts.getUserName().size(); x++) {
 			driver.get("https://www.bing.com");
 			signIn(accounts.getUserName().get(x), accounts.getPassword().get(x));
-			// Pull up sign in prompt
+			
 		}
 	}
 
@@ -62,7 +69,12 @@ public class SearchDriver {
 	public void search() {
 		for(int x = 0; x < 60; x++) {
 			WebElement searchField = driver.findElement(By.name("sb_form_q"));
-			searchField.sendKeys();
+			try {
+				searchField.sendKeys(terms.getSearchTerms()[rand.nextInt(terms.getSearchTerms().length)]);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			
 		}
 	}
 
