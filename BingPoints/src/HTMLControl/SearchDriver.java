@@ -7,10 +7,10 @@ import org.openqa.selenium.ie.*;
 
 import SignInInfo.AccountList;
 
-public class SuryStuff {
+public class SearchDriver {
 	
 	
-	public SuryStuff() {
+	public SearchDriver() {
 		
 		AccountList accounts = new AccountList(File location);
 		for(accounts.getList() list : accounts) {
