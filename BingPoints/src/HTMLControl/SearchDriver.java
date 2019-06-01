@@ -27,15 +27,15 @@ public class SearchDriver {
 		try {
 			new SearchDriver();
 		} catch (FileNotFoundException e) {
-
+			System.out.println("Failed at: File");
 		} catch (AWTException a) {
-
+			System.out.println("Failed at: Robot");
 		}
 	}
 
 	public SearchDriver() throws FileNotFoundException, AWTException, InterruptedException {
 		//init vars
-		AccountList accounts = new AccountList("File Location");
+		AccountList accounts = new AccountList("C:\\Users\\colli\\eclipse-workspace\\SignInInfo\\Resources\\modifiedlist.csv");
 		terms = new SearchTerms();
 		driver = new InternetExplorerDriver();
 		rob = new Robot();
@@ -77,6 +77,7 @@ public class SearchDriver {
 				searchField.sendKeys(terms.getSearchTerms()[rand.nextInt(terms.getSearchTerms().length)]);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
+				System.out.println("Failed at: File");
 			}
 			rob.keyPress(KeyEvent.VK_ENTER);
 			rob.keyRelease(KeyEvent.VK_ENTER);
