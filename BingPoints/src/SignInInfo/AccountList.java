@@ -1,26 +1,42 @@
 package SignInInfo;
 
 import java.io.File;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.ie.*;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class AccountList {
 	
 	private File list;
+	private Scanner scan;
+	private ArrayList<String> username;
+	private ArrayList<String> password;
 	
 	
-	public AccountList(File n) {
+	public AccountList(File n) throws FileNotFoundException {
 		this.list = n;
+		scan = new Scanner(list);
+		while(scan.hasNext()) {
+			username.add(setNextUserName());
+			password.add(setNextPassword());
+		}
 	}
 	
-	public String getNextUserName() {
-		list.getNext();
+	private String setNextUserName() {
+		return scan.next();
 	}
-	public String getNextPassword() {
-		list.getNext();
+	private String setNextPassword() {
+		return scan.next();
 	}
+	
+	public ArrayList<String> getUserName() {
+		return username;
+	}
+	
+	public ArrayList<String> getPassword(){
+		return password;
+	}
+	
 	
 	
 	
