@@ -23,7 +23,7 @@ public class SearchDriver {
 	private Robot rob;
 	private SearchTerms terms;
 	Random rand = new Random();
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		try {
 			new SearchDriver();
 		} catch (FileNotFoundException e) {
@@ -33,7 +33,7 @@ public class SearchDriver {
 		}
 	}
 
-	public SearchDriver() throws FileNotFoundException, AWTException {
+	public SearchDriver() throws FileNotFoundException, AWTException, InterruptedException {
 		//init vars
 		AccountList accounts = new AccountList("File Location");
 		terms = new SearchTerms();
@@ -44,7 +44,8 @@ public class SearchDriver {
 		for (int x = 0; x < accounts.getUserName().size(); x++) {
 			driver.get("https://www.bing.com");
 			signIn(accounts.getUserName().get(x), accounts.getPassword().get(x));
-			
+			search();
+			signOut();
 		}
 	}
 
@@ -63,10 +64,13 @@ public class SearchDriver {
 	}
 
 	public void signOut() {
-		
+		driver.get("https://www.bing.com");
+		WebElement signout = driver.findElement(By.name("id_d"));
+		signout.click();
+		return;
 	}
 
-	public void search() {
+	public void search() throws InterruptedException {
 		for(int x = 0; x < 60; x++) {
 			WebElement searchField = driver.findElement(By.name("sb_form_q"));
 			try {
@@ -74,7 +78,9 @@ public class SearchDriver {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			
+			rob.keyPress(KeyEvent.VK_ENTER);
+			rob.keyRelease(KeyEvent.VK_ENTER);
+			wait(100);
 		}
 	}
 
