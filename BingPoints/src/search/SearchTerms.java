@@ -15,7 +15,8 @@ public class SearchTerms {
 	private String[] searchTerms;
 	
 	
-	public String[] getSearchTerms() throws FileNotFoundException {
+	public String[] getSearchTerms() throws IOException {
+		setSearchTerms();
 		Scanner read = new Scanner(new File("C:\\Users\\colli\\eclipse-workspace\\SignInInfo\\Resources\\modifiedlist.csv"));
 		read.useDelimiter(",");
 		
@@ -44,7 +45,7 @@ public class SearchTerms {
 		str.replace("9","");
 		str.replace("0","");
 
-		FileWriter list = new FileWriter("C:\\Users\\colli\\eclipse-workspace\\SignInInfo\\Resources\\modifiedlist.csv");
+		FileWriter list = new FileWriter("");
 		for(char a : str.toCharArray()) {
 			list.append(a);
 		}

@@ -35,7 +35,7 @@ public class SearchDriver {
 
 	public SearchDriver() throws FileNotFoundException, AWTException, InterruptedException {
 		//init vars
-		AccountList accounts = new AccountList("C:\\Users\\colli\\eclipse-workspace\\SignInInfo\\Resources\\modifiedlist.csv");
+		AccountList accounts = new AccountList("C:\\Users\\colli\\eclipse-workspace\\SignInInfo\\Resources\\AccountInfo.csv");
 		terms = new SearchTerms();
 		driver = new InternetExplorerDriver();
 		rob = new Robot();
